@@ -22,7 +22,6 @@ load_dotenv()
 def get_auth():
     client = msal.ConfidentialClientApplication(config['client_id'], authority=config['authority'], client_credential=config['client_secret'])
     token_result = client.acquire_token_silent(config['scope'], account=None)
-    st.write(f"TOKEN --> {token_result}")
     if token_result:
         access_token = f"Bearer {token_result['access_token']}"
         st.write('Access token was loaded from cache')
