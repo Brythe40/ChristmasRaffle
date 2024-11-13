@@ -85,6 +85,14 @@ raffle_options = [item[0] for item in raffle_item_list]
 entry_item_list = get_data('https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/0b898170-c9aa-4ed3-8f37-13e14e3fe47f/items?expand=fields', "entries")
 entry_options = [item[0] for item in entry_item_list]
 
+# refresh lists
+def refresh():
+    raffle_item_list = get_data('https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/fe49f68c-2b4e-4679-bc9b-6bd3947ebf78/items?expand=fields($select=ItemName, Amount)', "raffle")
+    raffle_options = [item[0] for item in raffle_item_list]
+
+    entry_item_list = get_data('https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/0b898170-c9aa-4ed3-8f37-13e14e3fe47f/items?expand=fields', "entries")
+    entry_options = [item[0] for item in entry_item_list]
+
 # remove all entries after a win
 def delete_entry(user):
     username = user[0]
@@ -161,6 +169,8 @@ with col2:
         if st.button("Choose Winner", type='primary'): 
             st.snow()
             spinner(raffle_options.index(combobox)) 
+    if st.button("Refresh"): 
+        refresh()
 
 # st_lottie(url_json,
 #         width=1000,
