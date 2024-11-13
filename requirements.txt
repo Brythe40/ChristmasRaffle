@@ -2,5 +2,6 @@ pandas
 numpy
 msal==1.31.0
 msal-extensions==1.2.0
+config
 requests
 streamlit_lottie
