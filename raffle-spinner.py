@@ -6,24 +6,30 @@ import time
 import msal
 import requests
 import json
+from dotenv import load_dotenv
 from config import config
 from streamlit_lottie import st_lottie 
+
 
 entry_items_path = 'data/Christmas Raffle.csv'
 entry_items_data = pd.read_csv(entry_items_path, skiprows=0)
 entries = entry_items_data.iloc[:, 1].tolist()
 
-# this is where I need to grab the sharepoint data using graph, cache to load results faster
+
+# load data
+load_dotenv()
 @st.cache_data
 def get_auth():
+    print(f"Config -> {config['client_id']}")
     client = msal.ConfidentialClientApplication(config['client_id'], authority=config['authority'], client_credential=config['client_secret'])
     token_result = client.acquire_token_silent(config['scope'], account=None)
+    print(f"TOKEN --> {token_result}")
     if token_result:
-        access_token = f'Bearer {token_result['access_token']}'
+        access_token = f"Bearer {token_result['access_token']}"
         print('Access token was loaded from cache')
-    if not token_result:
+    else:
         token_result = client.acquire_token_for_client(scopes=config['scope'])
-        access_token = f'Bearer {token_result['access_token']}'
+        access_token = f"Bearer {token_result['access_token']}"
         print('New access token was acquired from Azure AD')
     return token_result
 
