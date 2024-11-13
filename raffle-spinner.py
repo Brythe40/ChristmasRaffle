@@ -22,14 +22,14 @@ load_dotenv()
 def get_auth():
     client = msal.ConfidentialClientApplication(config['client_id'], authority=config['authority'], client_credential=config['client_secret'])
     token_result = client.acquire_token_silent(config['scope'], account=None)
-    print(f"TOKEN --> {token_result}")
+    st.write(f"TOKEN --> {token_result}")
     if token_result:
         access_token = f"Bearer {token_result['access_token']}"
-        print('Access token was loaded from cache')
+        st.write('Access token was loaded from cache')
     else:
         token_result = client.acquire_token_for_client(scopes=config['scope'])
         access_token = f"Bearer {token_result['access_token']}"
-        print('New access token was acquired from Azure AD')
+        st.write('New access token was acquired from Azure AD')
     return token_result
 
 
@@ -85,17 +85,10 @@ raffle_options = [item[0] for item in raffle_item_list]
 entry_item_list = get_data('https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/0b898170-c9aa-4ed3-8f37-13e14e3fe47f/items?expand=fields', "entries")
 entry_options = [item[0] for item in entry_item_list]
 
-# refresh lists
-def refresh():
-    raffle_item_list = get_data('https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/fe49f68c-2b4e-4679-bc9b-6bd3947ebf78/items?expand=fields($select=ItemName, Amount)', "raffle")
-    raffle_options = [item[0] for item in raffle_item_list]
-
-    entry_item_list = get_data('https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/0b898170-c9aa-4ed3-8f37-13e14e3fe47f/items?expand=fields', "entries")
-    entry_options = [item[0] for item in entry_item_list]
-
 # remove all entries after a win
 def delete_entry(user):
     username = user[0]
+    st.write(f"deleting user {username}")
 
     for entry in entry_item_list:
         if entry[0] == username:
@@ -120,9 +113,9 @@ def delete_entry(user):
     patch_result = requests.patch(patch_url, headers=headers, data=json.dumps(data))
 
     if patch_result.ok:
-        print(f'Successfully updated HasWon field for {username}')
+        st.write(f'Successfully updated HasWon field for {username}')
     else:
-        print(f'Failed to update HasWon field {item_id} for {username}. Status code: {patch_result.status_code}')
+        st.write(f'Failed to update HasWon field {item_id} for {username}. Status code: {patch_result.status_code}')
 
 
 # selects winner and does animation
@@ -143,7 +136,7 @@ def spinner(raffle_index):
     else:
         time.sleep(3)
         results.write(f"There are no bids on this item.")
-        print(f"No one bid on this item")
+        st.write(f"No one bid on this item")
 
 # page setup
 col1, col2, col3 = st.columns([1, 50, 1])
@@ -154,7 +147,7 @@ url_json = dict()
 if anim_url.status_code == 200:
     url_json = anim_url.json()
 else:
-    print("Failed to GET animation.")
+    st.write("Failed to GET animation.")
 
 
 
@@ -169,5 +162,3 @@ with col2:
         if st.button("Choose Winner", type='primary'): 
             st.snow()
             spinner(raffle_options.index(combobox)) 
-    # if st.button("Refresh"): 
-    #     refresh()
