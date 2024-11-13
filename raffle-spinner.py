@@ -159,7 +159,7 @@ else:
 
 
 with col2:    
-    st.image("./images/Sigma Christmas Logo.png", use_column_width=True)
+    st.image("./images/Sigma Christmas Logo.png", use_container_width=True)
     combobox = st.selectbox(
         'Items Being Raffled',
         raffle_options,
