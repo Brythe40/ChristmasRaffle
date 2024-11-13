@@ -20,7 +20,6 @@ entries = entry_items_data.iloc[:, 1].tolist()
 load_dotenv()
 @st.cache_data
 def get_auth():
-    print(f"Config -> {config['client_id']}")
     client = msal.ConfidentialClientApplication(config['client_id'], authority=config['authority'], client_credential=config['client_secret'])
     token_result = client.acquire_token_silent(config['scope'], account=None)
     print(f"TOKEN --> {token_result}")
