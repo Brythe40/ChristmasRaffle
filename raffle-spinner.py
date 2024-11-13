@@ -18,7 +18,7 @@ entries = entry_items_data.iloc[:, 1].tolist()
 
 # load data
 load_dotenv()
-@st.cache_data
+@st.cache_data(ttl=3600)
 def get_auth():
     client = msal.ConfidentialClientApplication(config['client_id'], authority=config['authority'], client_credential=config['client_secret'])
     token_result = client.acquire_token_silent(config['scope'], account=None)
@@ -169,11 +169,5 @@ with col2:
         if st.button("Choose Winner", type='primary'): 
             st.snow()
             spinner(raffle_options.index(combobox)) 
-    if st.button("Refresh"): 
-        refresh()
-
-# st_lottie(url_json,
-#         width=1000,
-#         height=1000,
-#         key="snow-background"
-# )
+    # if st.button("Refresh"): 
+    #     refresh()
