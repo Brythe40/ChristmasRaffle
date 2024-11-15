@@ -10,11 +10,9 @@ from dotenv import load_dotenv
 from config import config
 from streamlit_lottie import st_lottie 
 
-
 entry_items_path = 'data/Christmas Raffle.csv'
 entry_items_data = pd.read_csv(entry_items_path, skiprows=0)
 entries = entry_items_data.iloc[:, 1].tolist()
-
 
 # load data
 load_dotenv()
@@ -30,7 +28,6 @@ def get_auth():
         access_token = f"Bearer {token_result['access_token']}"
         st.write('New access token was acquired from Azure AD')
     return token_result
-
 
 
 # get data from graph by url 
@@ -87,7 +84,6 @@ entry_options = [item[0] for item in entry_item_list]
 # remove all entries after a win
 def delete_entry(user):
     username = user[0]
-    st.write(f"deleting user {username}")
 
     for entry in entry_item_list:
         if entry[0] == username:
