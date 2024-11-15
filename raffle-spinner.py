@@ -108,9 +108,9 @@ def delete_entry(user):
     patch_result = requests.patch(patch_url, headers=headers, data=json.dumps(data))
 
     if patch_result.ok:
-        st.write(f'Successfully updated HasWon field for {username}')
+        print(f'Successfully updated HasWon field for {username}')
     else:
-        st.write(f'Failed to update HasWon field {item_id} for {username}. Status code: {patch_result.status_code}')
+        print(f'Failed to update HasWon field {item_id} for {username}. Status code: {patch_result.status_code}')
 
 
 # selects winner and does animation
@@ -125,13 +125,11 @@ def spinner(raffle_index):
     if len(entered) > 0: 
         winner = random.choice(entered)
         time.sleep(3)
-        # results.write(f"The winner is {winner[0]}")
         results.markdown(f"<h1 style='text-align: center; font-size: 80px;'>The winner is {winner[0]}!</h1>", unsafe_allow_html=True)
         delete_entry(winner)
     else:
         time.sleep(3)
         results.write(f"There are no bids on this item.")
-        st.write(f"No one bid on this item")
 
 # page setup
 col1, col2, col3 = st.columns([1, 50, 1])
