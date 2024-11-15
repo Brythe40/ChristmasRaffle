@@ -76,7 +76,7 @@ def get_data(url, val):
     return graph_data
 
 raffle_item_list = get_data('https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/fe49f68c-2b4e-4679-bc9b-6bd3947ebf78/items?expand=fields($select=ItemName, Amount)', "raffle")
-raffle_options = [item[0] for item in raffle_item_list]
+raffle_options = [item[0] for item in raffle_item_list if item[1] <= 0]
 
 entry_item_list = get_data('https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/0b898170-c9aa-4ed3-8f37-13e14e3fe47f/items?expand=fields', "entries")
 entry_options = [item[0] for item in entry_item_list]
@@ -115,7 +115,6 @@ def delete_entry(user):
 def remove_item(item_index):
     # item_index element 6
     for raffle_item in raffle_item_list:
-        st.write(f"Raffle Item Id: {raffle_item}, What we be at: {item_index + 5}")
         if raffle_item[1] <= 0:
             item_id = raffle_item[0]
             #print(item_id)
