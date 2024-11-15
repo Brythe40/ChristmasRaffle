@@ -116,9 +116,9 @@ def remove_item(item_index):
     # item_index element 6
     for raffle_item in raffle_item_list:
         st.write(f"Raffle Item Id: {raffle_item}, What we be at: {item_index + 5}")
-        if raffle_item[6] == item_index + 5:
-            item_id = raffle_item[3]
-            print(item_id)
+        if raffle_item[1] <= 0:
+            item_id = raffle_item[0]
+            #print(item_id)
 
     assert item_id is not None, "No item ID"
     patch_url = f"https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/fe49f68c-2b4e-4679-bc9b-6bd3947ebf78/items/{item_index}"
