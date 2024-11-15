@@ -156,7 +156,6 @@ def spinner(raffle_index):
         time.sleep(3)
         results.markdown(f"<h1 style='text-align: center; font-size: 80px;'>The winner is {winner[0]}!</h1>", unsafe_allow_html=True)
         delete_entry(winner)
-        st.write(f"Raffle item index: {raffle_index}")
         remove_item(raffle_index)
     else:
         time.sleep(3)
