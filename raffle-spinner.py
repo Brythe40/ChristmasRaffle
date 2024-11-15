@@ -115,12 +115,12 @@ def delete_entry(user):
 def remove_item(item_index):
     # item_index element 6
     for raffle_item in raffle_item_list:
-        if raffle_item[6] == item_index + 6:
+        if raffle_item[6] == item_index:
             item_id = raffle_item[3]
             print(item_id)
 
     assert item_id is not None, "No item ID"
-    patch_url = f"https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/fe49f68c-2b4e-4679-bc9b-6bd3947ebf78/items/{item_index + 6}"
+    patch_url = f"https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/fe49f68c-2b4e-4679-bc9b-6bd3947ebf78/items/{item_index}"
 
     data = {
         'fields': {
@@ -155,6 +155,7 @@ def spinner(raffle_index):
         time.sleep(3)
         results.markdown(f"<h1 style='text-align: center; font-size: 80px;'>The winner is {winner[0]}!</h1>", unsafe_allow_html=True)
         delete_entry(winner)
+        st.write(f"Raffle item index: {raffle_index}")
         remove_item(raffle_index)
     else:
         time.sleep(3)
