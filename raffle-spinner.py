@@ -112,6 +112,34 @@ def delete_entry(user):
     else:
         print(f'Failed to update HasWon field {item_id} for {username}. Status code: {patch_result.status_code}')
 
+def remove_item(item_index):
+    # item_index element 6
+    for raffle_item in raffle_item_list:
+        if raffle_item[6] == item_index + 6:
+            item_id = raffle_item[3]
+            print(item_id)
+
+    assert item_id is not None, "No item ID"
+    patch_url = f"https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/fe49f68c-2b4e-4679-bc9b-6bd3947ebf78/items/{item_index + 6}"
+
+    data = {
+        'fields': {
+            'HasWon': 1
+        }
+    }
+
+    token_result = get_auth()
+    headers = {
+        'Authorization': token_result['access_token'],
+        'Content-Type': 'application/json'
+    }
+
+    patch_result = requests.patch(patch_url, headers=headers, data=json.dumps(data))
+
+    if patch_result.ok:
+        print(f'Successfully updated HasWon field for {raffle_item}')
+    else:
+        print(f'Failed to update HasWon field {item_id} for {raffle_item}. Status code: {patch_result.status_code}')
 
 # selects winner and does animation
 def spinner(raffle_index):
@@ -127,6 +155,7 @@ def spinner(raffle_index):
         time.sleep(3)
         results.markdown(f"<h1 style='text-align: center; font-size: 80px;'>The winner is {winner[0]}!</h1>", unsafe_allow_html=True)
         delete_entry(winner)
+        remove_item(raffle_index)
     else:
         time.sleep(3)
         results.write(f"There are no bids on this item.")
