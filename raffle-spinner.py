@@ -119,7 +119,7 @@ def spinner(raffle_index):
     entered = []
 
     for item in entry_item_list:
-        if item[raffle_index + 1] > 0 and item[11] == False:
+        if item[raffle_index + 1] > 0 and item[21] == False:
             entered.append(item)
 
     if len(entered) > 0: 
