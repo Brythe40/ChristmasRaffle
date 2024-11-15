@@ -115,7 +115,7 @@ def delete_entry(user):
 def remove_item(item_index):
     # item_index element 6
     for raffle_item in raffle_item_list:
-        st.write(f"Raffle Item Id: {raffle_item[6]}, What we be at: {item_index + 5}")
+        st.write(f"Raffle Item Id: {raffle_item}, What we be at: {item_index + 5}")
         if raffle_item[6] == item_index + 5:
             item_id = raffle_item[3]
             print(item_id)
