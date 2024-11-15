@@ -87,7 +87,7 @@ def delete_entry(user):
 
     for entry in entry_item_list:
         if entry[0] == username:
-            item_id = entry[12]
+            item_id = entry[22]
             print(item_id)
 
     assert item_id is not None, "No item ID"
@@ -101,8 +101,8 @@ def delete_entry(user):
 
     token_result = get_auth()
     headers = {
-        'Authorization': token_result['access_token']
-        # 'Content-Type': 'application/json'
+        'Authorization': token_result['access_token'],
+        'Content-Type': 'application/json'
     }
 
     patch_result = requests.patch(patch_url, headers=headers, data=json.dumps(data))
