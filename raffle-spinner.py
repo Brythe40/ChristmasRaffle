@@ -22,11 +22,11 @@ def get_auth():
     token_result = client.acquire_token_silent(config['scope'], account=None)
     if token_result:
         access_token = f"Bearer {token_result['access_token']}"
-        st.write('Access token was loaded from cache')
+        print('Access token was loaded from cache')
     else:
         token_result = client.acquire_token_for_client(scopes=config['scope'])
         access_token = f"Bearer {token_result['access_token']}"
-        st.write('New access token was acquired from Azure AD')
+        print('New access token was acquired from Azure AD')
     return token_result
 
 
@@ -101,8 +101,8 @@ def delete_entry(user):
 
     token_result = get_auth()
     headers = {
-        'Authorization': token_result['access_token'],
-        'Content-Type': 'application/json'
+        'Authorization': token_result['access_token']
+        # 'Content-Type': 'application/json'
     }
 
     patch_result = requests.patch(patch_url, headers=headers, data=json.dumps(data))
