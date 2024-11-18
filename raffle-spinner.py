@@ -82,7 +82,7 @@ def get_data(url, val):
         graph_data = items
     return graph_data
 
-raffle_item_list = get_data('https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/fe49f68c-2b4e-4679-bc9b-6bd3947ebf78/items?expand=fields($select=ItemName, Amount)', "raffle")
+raffle_item_list = get_data('https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/fe49f68c-2b4e-4679-bc9b-6bd3947ebf78/items?expand=fields($select=ItemName, Amount, HasWon, SeqID)', "raffle")
 raffle_options = [item[0] for item in raffle_item_list if item[2] <= 0]
 
 entry_item_list = get_data('https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/0b898170-c9aa-4ed3-8f37-13e14e3fe47f/items?expand=fields', "entries")
