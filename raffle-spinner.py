@@ -47,7 +47,7 @@ def get_data(url, val):
                 item['fields']['ItemName'], 
                 item['fields']['Amount'],
                 item['fields'].get('HasWon', 0),
-                item['fields'].get('SeqID', None)
+                item['fields'].get('SeqID', 0)
             ) for item in result['value']]
         graph_data = items
     if graph_result.status_code == 200 and val=="entries":
