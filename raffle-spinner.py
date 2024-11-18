@@ -179,4 +179,4 @@ with col2:
         if st.button("Choose Winner", type='primary'): 
             st.snow()
             spinner(raffle_options.index(combobox)) 
-            st.write(combobox)
+            st.write(combobox['id'])
