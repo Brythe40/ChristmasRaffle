@@ -120,7 +120,7 @@ def delete_entry(user):
         print(f'Failed to update HasWon field {item_id} for {username}. Status code: {patch_result.status_code}')
 
 def remove_item(item):
-    patch_url = f"https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/fe49f68c-2b4e-4679-bc9b-6bd3947ebf78/items/{item['id']}"
+    patch_url = f"https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/fe49f68c-2b4e-4679-bc9b-6bd3947ebf78/items/{item + 5}"
 
     data = {
         'fields': {
