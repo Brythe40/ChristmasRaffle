@@ -44,7 +44,8 @@ def get_data(url, val):
         items = [
             (
                 item['fields']['ItemName'], 
-                item['fields']['Amount'], 
+                item['fields']['Amount'],
+                item['fields']['Modified'],
                 item['fields'].get('SeqID', None)
             ) for item in result['value']]
         graph_data = items
