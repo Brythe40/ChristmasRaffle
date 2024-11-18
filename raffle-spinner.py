@@ -41,7 +41,7 @@ def get_data(url, val):
     print(f'Status code: {graph_result.status_code}')
     if graph_result.status_code == 200 and val=="raffle":
         result = graph_result.json()
-        items = [(item['fields']['ItemName'], item['fields']['Amount'], item['fields']['HasWon']) for item in result['value']]
+        items = [(item['fields']['ItemName'], item['fields']['Amount'], item['fields']['SeqID']) for item in result['value']]
         graph_data = items
     if graph_result.status_code == 200 and val=="entries":
         result = graph_result.json()
@@ -113,13 +113,6 @@ def delete_entry(user):
         print(f'Failed to update HasWon field {item_id} for {username}. Status code: {patch_result.status_code}')
 
 def remove_item(item_index):
-    # item_index element 6
-    # for raffle_item in raffle_item_list:
-    #     if raffle_item[1] <= 0:
-    #         item_id = raffle_item[0]
-            #print(item_id)
-
-    # assert item_id is not None, "No item ID"
     patch_url = f"https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/fe49f68c-2b4e-4679-bc9b-6bd3947ebf78/items/{item_index}"
 
     data = {
@@ -135,11 +128,6 @@ def remove_item(item_index):
     }
 
     patch_result = requests.patch(patch_url, headers=headers, data=json.dumps(data))
-
-    # if patch_result.ok:
-    #     print(f'Successfully updated HasWon field for {raffle_item}')
-    # else:
-    #     print(f'Failed to update HasWon field {item_id} for {raffle_item}. Status code: {patch_result.status_code}')
 
 # selects winner and does animation
 def spinner(raffle_index):
