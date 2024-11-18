@@ -41,7 +41,12 @@ def get_data(url, val):
     print(f'Status code: {graph_result.status_code}')
     if graph_result.status_code == 200 and val=="raffle":
         result = graph_result.json()
-        items = [(item['fields']['ItemName'], item['fields']['Amount'], item['fields']['SeqID']) for item in result['value']]
+        items = [
+            (
+                item['fields']['ItemName'], 
+                item['fields']['Amount'], 
+                item['fields'].get('SeqID', None)
+            ) for item in result['value']]
         graph_data = items
     if graph_result.status_code == 200 and val=="entries":
         result = graph_result.json()
