@@ -46,7 +46,8 @@ def get_data(url, val):
                 item['fields']['ItemName'], 
                 item['fields']['Amount'],
                 item['fields'].get('HasWon', 0),
-                item['fields'].get('SeqID', 0)
+                item['fields'].get('SeqID', 0),
+                item['id']
             ) for item in result['value']]
         graph_data = items
     if graph_result.status_code == 200 and val=="entries":
@@ -118,8 +119,8 @@ def delete_entry(user):
     else:
         print(f'Failed to update HasWon field {item_id} for {username}. Status code: {patch_result.status_code}')
 
-def remove_item(item_index):
-    patch_url = f"https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/fe49f68c-2b4e-4679-bc9b-6bd3947ebf78/items/{item_index}"
+def remove_item(item):
+    patch_url = f"https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45-46ab-afad-5d8e21a029eb/lists/fe49f68c-2b4e-4679-bc9b-6bd3947ebf78/items/{item['id']}"
 
     data = {
         'fields': {
@@ -178,3 +179,4 @@ with col2:
         if st.button("Choose Winner", type='primary'): 
             st.snow()
             spinner(raffle_options.index(combobox)) 
+            raffle_options.pop(raffle_options.index(combobox))
