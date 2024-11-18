@@ -41,7 +41,6 @@ def get_data(url, val):
     print(f'Status code: {graph_result.status_code}')
     if graph_result.status_code == 200 and val=="raffle":
         result = graph_result.json()
-        for item in result['value']: st.write(item['fields'])
         items = [
             (
                 item['fields']['ItemName'], 
