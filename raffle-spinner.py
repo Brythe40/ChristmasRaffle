@@ -173,8 +173,8 @@ with col2:
         """
         <style>
         div[data-baseweb="select"] > div {
-            font-size: 40px;
-            min-height: 200px;
+            font-size: 60px;
+            min-height: 100px;
             overflow-wrap: normal;
         }
         </style>
