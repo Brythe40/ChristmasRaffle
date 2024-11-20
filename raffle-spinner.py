@@ -178,6 +178,7 @@ with col2:
         }
         div[data-baseweb="select"] > div {
             font-size: 40px;
+            height: 200px;
         }
         </style>
         """,
