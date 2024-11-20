@@ -150,7 +150,6 @@ def spinner(raffle_index):
         time.sleep(3)
         results.markdown(f"<h1 style='text-align: center; font-size: 80px;'>The winner is {winner[0]}!</h1>", unsafe_allow_html=True)
         delete_entry(winner)
-        remove_item(raffle_index)
     else:
         time.sleep(3)
         results.write(f"There are no bids on this item.")
@@ -173,12 +172,10 @@ with col2:
     st.markdown(
         """
         <style>
-        div[data-baseweb="select"] {
-            height: 200px;
-        }
         div[data-baseweb="select"] > div {
             font-size: 40px;
-            height: 200px;
+            min-height: 200px;
+            overflow-wrap: normal;
         }
         </style>
         """,
