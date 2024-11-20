@@ -170,6 +170,16 @@ else:
 
 with col2:    
     st.image("./images/Sigma Christmas Logo.png", use_container_width=True)
+    st.markdown(
+        """
+        <style>
+        div[data-baseweb="select"] > div {
+            font-size: 40px;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     combobox = st.selectbox(
         'Items Being Raffled',
         options=raffle_options,
