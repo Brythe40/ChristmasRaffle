@@ -173,6 +173,9 @@ with col2:
     st.markdown(
         """
         <style>
+        div[data-baseweb="select"] {
+            height: 200px;
+        }
         div[data-baseweb="select"] > div {
             font-size: 40px;
         }
