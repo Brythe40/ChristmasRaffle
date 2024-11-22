@@ -172,6 +172,9 @@ with col2:
     st.markdown(
         """
         <style>
+        .br-st {
+            white-space: pre-wrap;
+        }
         div[data-baseweb="select"] > div {
             font-size: 60px;
             min-height: 100px;
