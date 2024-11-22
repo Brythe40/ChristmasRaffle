@@ -175,7 +175,11 @@ with col2:
         div[data-baseweb="select"] > div {
             font-size: 60px;
             min-height: 100px;
-            overflow-wrap: normal;
+            height: auto;
+            font-weight: bold;
+            overflow-wrap: normal !important;
+            text-wrap-mode: wrap !important;
+            white-space: normal;
         }
         </style>
         """,
