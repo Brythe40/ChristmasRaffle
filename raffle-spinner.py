@@ -172,7 +172,7 @@ with col2:
     st.markdown(
         """
         <style>
-        div.br-st {
+        .st-br {
             white-space: pre-wrap;
         }
         div[data-baseweb="select"] > div {
