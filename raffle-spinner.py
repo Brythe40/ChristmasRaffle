@@ -75,6 +75,8 @@ def get_data(url, val):
                 item['fields']['TherapeuticDeepTissueMassageGunK'],
                 item['fields']['WalkingPadwithIncline'],
                 item['fields']['WaterpikAquariusWaterFlosser'],
+                item['fields']['EverywhereCrossbodyBagLululemonG'],
+                item['fields']['RTICSigmaIceChest'],
                 item['fields']['HasWon'],
                 item['id']
             ) for item in result['value']
