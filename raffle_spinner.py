@@ -11,9 +11,9 @@ from config import config
 from streamlit_lottie import st_lottie 
 
 
-entry_items_path = 'data/Christmas Raffle.csv'
-entry_items_data = pd.read_csv(entry_items_path, skiprows=0)
-entries = entry_items_data.iloc[:, 1].tolist()
+# entry_items_path = 'data/Christmas Raffle.csv'
+# entry_items_data = pd.read_csv(entry_items_path, skiprows=0)
+# entries = entry_items_data.iloc[:, 1].tolist()
 
 # load data
 load_dotenv()
@@ -175,7 +175,7 @@ else:
 
 
 with col2:    
-    st.image("./images/Sigma Christmas Logo.png", use_container_width=True)
+    st.image("./images/Sigma Christmas Logo.png")
     st.markdown(
         """
         <style>
