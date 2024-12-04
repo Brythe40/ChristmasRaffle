@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 from config import config
 from streamlit_lottie import st_lottie 
 
+
 entry_items_path = 'data/Christmas Raffle.csv'
 entry_items_data = pd.read_csv(entry_items_path, skiprows=0)
 entries = entry_items_data.iloc[:, 1].tolist()
@@ -77,6 +78,9 @@ def get_data(url, val):
                 item['fields']['WaterpikAquariusWaterFlosser'],
                 item['fields']['EverywhereCrossbodyBagLululemonG'],
                 item['fields']['RTICSigmaIceChest'],
+                item['fields']['BeckyFosCanvasGraphic'],
+                item['fields']['DateNightPackage'],
+                item['fields']['PearceBespokeCustomSuitJacket'],
                 item['fields']['HasWon'],
                 item['id']
             ) for item in result['value']
@@ -96,7 +100,7 @@ def delete_entry(user):
 
     for entry in entry_item_list:
         if entry[0] == username:
-            item_id = entry[22]
+            item_id = entry[len(entry) - 1]
             print(item_id)
 
     assert item_id is not None, "No item ID"
@@ -144,11 +148,12 @@ def spinner(raffle_index):
     entered = []
 
     for item in entry_item_list:
-        if item[raffle_index + 1] > 0 and item[21] == False:
+        if item[raffle_index + 1] > 0 and item[len(item) - 2] == False:
             entered.append(item)
 
     if len(entered) > 0: 
         winner = random.choice(entered)
+        # suspense meter
         time.sleep(3)
         results.markdown(f"<h1 style='text-align: center; font-size: 80px;'>The winner is {winner[0]}!</h1>", unsafe_allow_html=True)
         delete_entry(winner)
