@@ -10,10 +10,8 @@ from dotenv import load_dotenv
 from config import config
 from streamlit_lottie import st_lottie 
 
-
-# entry_items_path = 'data/Christmas Raffle.csv'
-# entry_items_data = pd.read_csv(entry_items_path, skiprows=0)
-# entries = entry_items_data.iloc[:, 1].tolist()
+if 'winner_name' not in st.session_state:
+    st.session_state.winner_name = None
 
 # load data
 load_dotenv()
@@ -98,10 +96,11 @@ entry_item_list = get_data('https://graph.microsoft.com/v1.0/sites/2102e2f9-9d45
 entry_options = [item[0] for item in entry_item_list]
 
 # remove all entries after a win
-def delete_entry(user):
-    username = user[0]
+def delete_entry(username):
+    # username = user[0]
 
     for entry in entry_item_list:
+        print(f"Entry: {entry[0]}, Winner: {username}")
         if entry[0] == username:
             item_id = entry[len(entry) - 1]
             print(item_id)
@@ -159,10 +158,17 @@ def spinner(raffle_index):
         # suspense meter
         time.sleep(3)
         results.markdown(f"<h1 style='text-align: center; font-size: 80px;'>The winner is {winner[0]}!</h1>", unsafe_allow_html=True)
-        delete_entry(winner)
+        # delete_entry(winner)
+        return winner
     else:
         time.sleep(3)
         results.write(f"There are no bids on this item.")
+        return None
+
+def confirm(winner, item):
+    delete_entry(winner)
+    remove_item(item)
+    winner_name = ""
 
 # page setup
 col1, col2, col3 = st.columns([1, 50, 1])
@@ -204,8 +210,15 @@ with col2:
         format_func=lambda item: item['name'],
         label_visibility='hidden'
     )
+    
     with st.spinner('Selecting a winner...'):
         if st.button("Choose Winner", type='primary'): 
             st.snow()
-            spinner(raffle_options.index(combobox)) 
-            remove_item(combobox['id'])
+            winner = spinner(raffle_options.index(combobox)) 
+            st.session_state.winner_name = winner[0]
+            # remove_item(combobox['id'])
+    if st.button("Confirm", type="secondary"):
+        if st.session_state.winner_name:
+            confirm(st.session_state.winner_name, combobox['id'])
+        else:
+            st.warning("No winner selected.")
