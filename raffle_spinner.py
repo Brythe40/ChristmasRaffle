@@ -82,6 +82,7 @@ def get_data(url, val):
                 item['fields']['PearceBespokeCustomSuitJacket'],
                 item['fields']['KamadoKettleJoeGrill'],
                 item['fields']['MichaelKorsPurse'],
+                item['fields']['MYSTERYITEM'],
                 item['fields']['HasWon'],
                 item['id']
             ) for item in result['value']
