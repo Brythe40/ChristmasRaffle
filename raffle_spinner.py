@@ -81,6 +81,9 @@ def get_data(url, val):
                 item['fields']['BeckyFosCanvasGraphic'],
                 item['fields']['DateNightPackage'],
                 item['fields']['PearceBespokeCustomSuitJacket'],
+                item['fields']['PearceBespokeCustomSuitJacket'],
+                item['fields']['KamadoKettleJoeGrill'],
+                item['fields']['MichaelKorsPurse'],
                 item['fields']['HasWon'],
                 item['id']
             ) for item in result['value']
@@ -148,7 +151,7 @@ def spinner(raffle_index):
     entered = []
 
     for item in entry_item_list:
-        if item[raffle_index + 1] > 0 and item[len(item) - 2] == False:
+        if item[raffle_index + 1] > 0 and item[len(item) - 2] == 0:
             entered.append(item)
 
     if len(entered) > 0: 
