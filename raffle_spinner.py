@@ -212,7 +212,7 @@ with col2:
     combobox = st.selectbox(
         'Items Being Raffled',
         options=raffle_options,
-        format_func=lambda item: f"{item['name']} (ID: {item['id']})",
+        format_func=lambda item: item['name'],
         label_visibility='hidden'
     )
     
