@@ -211,14 +211,14 @@ with col2:
     combobox = st.selectbox(
         'Items Being Raffled',
         options=raffle_options,
-        format_func=lambda item: item['name'] & item['seqID'],
+        format_func=lambda item: f"{item['name']} (ID: {item['id']})",
         label_visibility='hidden'
     )
     
     with st.spinner('Selecting a winner...'):
         if st.button("Choose Winner", type='primary'): 
             st.snow()
-            winner = spinner(raffle_options.index(combobox)) 
+            winner = spinner(raffle_options.index(combobox.)) 
             st.session_state.winner_name = winner[0]
             # remove_item(combobox['id'])
     if st.button("Confirm", type="secondary"):
