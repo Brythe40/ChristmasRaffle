@@ -154,7 +154,7 @@ def spinner(raffle_index):
     results = st.empty()
     entered = []
 
-    for item in entry_options:
+    for item in entry_item_list:
         if item[raffle_index + 1] > 0 and item[len(item) - 2] == 0:
             entered.append(item)
 
