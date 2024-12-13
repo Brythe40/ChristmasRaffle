@@ -198,7 +198,7 @@ with col2:
         .st-br {
             white-space: pre-wrap;
         }
-        div[data-baseweb="select"] .st-bq {
+        div[data-baseweb="select"] > div {
             font-size: 60px;
             min-height: 100px;
             height: auto;
