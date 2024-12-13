@@ -218,7 +218,7 @@ with col2:
     with st.spinner('Selecting a winner...'):
         if st.button("Choose Winner", type='primary'): 
             st.snow()
-            winner = spinner(raffle_options.index(combobox.)) 
+            winner = spinner(raffle_options.index(combobox)) 
             st.session_state.winner_name = winner[0]
             # remove_item(combobox['id'])
     if st.button("Confirm", type="secondary"):
