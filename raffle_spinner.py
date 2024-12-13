@@ -54,6 +54,7 @@ def get_data(url, val):
         items = [
             (
                 item['fields']['Name'], 
+                item['fields']['WaterpikAquariusWaterFlosser'],
                 item['fields']['SoloStoveFirePit'],
                 item['fields']['FishingRod_x002f_TackleBoxPackag'],
                 item['fields']['AppleAirPodsPro'],
@@ -73,7 +74,7 @@ def get_data(url, val):
                 item['fields']['SonyPlayStation5SlimConsole'],
                 item['fields']['TherapeuticDeepTissueMassageGunK'],
                 item['fields']['WalkingPadwithIncline'],
-                item['fields']['WaterpikAquariusWaterFlosser'],
+                
                 item['fields']['EverywhereCrossbodyBagLululemonG'],
                 item['fields']['RTICSigmaIceChest'],
                 item['fields']['BeckyFosCanvasGraphic'],
@@ -153,7 +154,7 @@ def spinner(raffle_index):
     results = st.empty()
     entered = []
 
-    for item in entry_item_list:
+    for item in entry_options:
         if item[raffle_index + 1] > 0 and item[len(item) - 2] == 0:
             entered.append(item)
 
