@@ -157,11 +157,12 @@ def spinner(raffle_index):
     entered = []
     
     for item in entry_item_list:
-        if item[raffle_index] > 0 and item[len(item) - 2] == 0:
-            for i in range(0, int(item[raffle_index])):
-                entered.append(item)
+        print(f"raffle index: {raffle_index}")
+        if item[raffle_index + 1] > 0 and item[len(item) - 2] == 0:
+            entered.extend([item] * int(item[raffle_index + 1]))
 
     if len(entered) > 0: 
+        print(entered)
         winner = random.choice(entered)
         # suspense meter
         time.sleep(3)
